@@ -3,38 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainy Notes - AI Powered Note Taking</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Brainy Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
     <header>
-        <h1>Brainy Notes</h1>
+        <div class="logo">
+            <span>brainynotes</span>
+            <span class="ai">AI</span>
+        </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Tutorial</a></li>
-                <li><a class="sign-in" href="#">Sign In Now →</a></li>
+                <li class="active"><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
             </ul>
+            <button class="sign-in-btn">Sign In Now →</button>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h2>solve it with one click with brainy</h2>
-            <p>Create your summary wisely, make your choices boldly, and simplify your work smartly — because every decision brings you closer to success!</p>
-            <a class="cta-button" href="#">Try Brainy Notes free →</a>
-        </section>
-        <section class="content">
-            <h3>Brainy AI FREE</h3>
-            <div class="upload-section">
-                <div class="upload-box">
-                    <p>Upload Dokumen</p>
-                </div>
-                <p>Tolong ringkaskan dokumen ini secara singkat pada setiap bab..</p>
+    <main id="home" class="hero">
+        <div class="hero-content">
+            <div class="logo-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="8" fill="#A67BFF"/>
+                    <path d="M14 18H34M14 24H34M14 30H26" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
-        </section>
+            <h1>Brainy Notes</h1>
+            <p class="subtitle">Buat ringkasan materi menjadi lebih mudah!</p>
+            
+            <div class="tagline">
+                <h2>solve it with one click <br>with brainy</h2>
+                <p class="description">
+                    Create your summary wisely, make your choices boldly, and simplify your work 
+                    smartly — because every decision brings you closer to success!
+                </p>
+                <button class="try-free-btn">Try Brainy Notes free →</button>
+            </div>
+        </div>
     </main>
+
+    <section id="dashboard" class="dashboard">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <h2 class="sidebar-title">Brainy AI FREE</h2>
+                <nav>
+                    <ul>
+                        <li class="active"><a href="#"><span class="icon">✨</span>Brainy UI</a></li>
+                        <li><a href="#"><span class="icon">◆</span>My Projects</a></li>
+                        <li><a href="#"><span class="icon">📄</span>Other Pages</a></li>
+                        <li class="sub-item"><a href="#">Prompt Page</a></li>
+                        <li class="sub-item"><a href="#">Register</a></li>
+                        <li class="sub-item"><a href="#">Sign In</a></li>
+                    </ul>
+                </nav>
+                <div class="user-profile">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5fAMiirvF4D7XUDHBYw2Vk7ethNAlU.png" alt="User Avatar" class="avatar">
+                    <span class="username">Gemscode</span>
+                    <button class="share-btn">↗</button>
+                </div>
+            </aside>
+            <main class="dashboard-content">
+                <h2 class="content-title">
+                    <span class="icon">📚</span>
+                    Brainy Notes AI
+                </h2>
+                <div class="upload-section">
+                    <div class="upload-button">
+                        <span class="icon">📤</span>
+                        Upload Dokumen
+                    </div>
+                    <div class="upload-text">
+                        Tolong ringkaskan dokumen ini secara singkat pada setiap bab_
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="regenerate-btn">
+                        <span class="icon">🔄</span> Regenerate response
+                    </button>
+                    <input type="text" placeholder="Make a Summary" class="summary-input">
+                    <button class="submit-btn">Submit</button>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <footer class="trusted-section">
+        <p>Trusted by technology companies in Central Java</p>
+        <div class="company-logos">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5fAMiirvF4D7XUDHBYw2Vk7ethNAlU.png" alt="Ardata" class="company-logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5fAMiirvF4D7XUDHBYw2Vk7ethNAlU.png" alt="CCN Creative" class="company-logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5fAMiirvF4D7XUDHBYw2Vk7ethNAlU.png" alt="techarea" class="company-logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-5fAMiirvF4D7XUDHBYw2Vk7ethNAlU.png" alt="NDA" class="company-logo">
+        </div>
+    </footer>
 </body>
 </html>
