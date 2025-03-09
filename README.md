@@ -5,7 +5,7 @@
 ## 📌 Fitur
 - ✨ Meringkas dokumen dengan cepat
 - 📄 Mendukung berbagai format file (PDF, DOCX, TXT)
-- 🎨 UI elegan dengan Bootstrap
+- 🎨 Dengan UI
 - 🌙 Mode gelap dan terang
 
 ## 🛠 Instalasi
