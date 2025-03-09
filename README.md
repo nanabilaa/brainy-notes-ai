@@ -1,6 +1,6 @@
 # Brainy Notes AI
 
-🚀 **Brainy Notes AI** adalah sebuah aplikasi yang membantu dalam meringkas dokumen secara otomatis menggunakan teknologi AI.
+🚀 **Brainy Notes AI** adalah sebuah web yang membantu dalam meringkas dokumen secara otomatis menggunakan teknologi AI.
 
 ## 📌 Fitur
 - ✨ Meringkas dokumen dengan cepat
