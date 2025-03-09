@@ -207,6 +207,41 @@ footer {
     height: 40px;
     filter: brightness(0) invert(1);
 }
+body {
+            background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+            color: white;
+        }
+        .about-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #2C2C2C; /* Warna abu-abu gelap */
+        }
+        .about-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #D1C4E9; /* Warna ungu muda */
+        }
+        .highlight-section {
+            background-color: #D1C4E9; /* Warna ungu muda untuk kontras */
+            padding: 80px 20px;
+        }
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white;
+        }
+        .footer-section {
+            background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .trusted-logos img {
+            height: 50px;
+            margin: 10px;
+            filter: brightness(0) invert(1); /* Membuat logo jadi putih */
+        }
 
 /* Responsiveness */
 @media (max-width: 1024px) {
@@ -259,3 +294,39 @@ footer {
         padding: 1rem;
     }
 }
+body {
+    background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+    color: white;
+}
+.about-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #2C2C2C; /* Warna abu-abu gelap */
+}
+.about-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #D1C4E9; /* Warna ungu muda */
+}
+.highlight-section {
+    background-color: #D1C4E9; /* Warna ungu muda untuk kontras */
+    padding: 80px 20px;
+}
+.about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.6;
+    color: white;
+}
+.footer-section {
+    background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+    text-align: center;
+    padding: 40px 20px;
+}
+.trusted-logos img {
+    height: 50px;
+    margin: 10px;
+    filter: brightness(0) invert(1); /* Membuat logo jadi putih */
+}
+
