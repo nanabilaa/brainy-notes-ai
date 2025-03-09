@@ -13,3 +13,4 @@ document.getElementById("tryFreeBtn").addEventListener("click", function () {
 document.getElementById("tryNowBtn").addEventListener("click", function () {
     window.location.href = "main.html";
 });
+// 

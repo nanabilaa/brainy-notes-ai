@@ -14,8 +14,7 @@ Pastikan Anda memiliki **Git** dan **Node.js** (jika aplikasi menggunakan JavaSc
 1. Clone repository ini:
    ```sh
    git clone https://github.com/nanabilaa/brainy-notes-ai.git
-   cd brainy-notes-ai
-
+   
 💻 Penggunaan
 Upload Dokumen
 Klik "Generate Summary"
@@ -23,3 +22,4 @@ Dapatkan ringkasan dalam hitungan detik
 
 🤝 Kontribusi
 Jika ingin berkontribusi, fork repository ini, buat branch baru, dan lakukan pull request.
+<!--  -->
