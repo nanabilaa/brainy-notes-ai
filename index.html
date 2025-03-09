@@ -34,7 +34,7 @@
               </div>
             </div>
           </nav>
-    <!-- Hero Section -->
+    <!-- Section -->
     <section class="hero-section">
         <div class="hero-content">
             <h1>Brainy Notes</h1>
@@ -48,6 +48,9 @@
 <script>
     function redirectToTrial() {
         window.location.href = "trial.html";
+    }
+    function redirectToMain() {
+        window.location.href = "main.html";
     }
 </script>
 
@@ -86,7 +89,7 @@
                     Upload Dokumen
                 </div>
                 <div class="upload-text">
-                    Tolong ringkaskan dokumen ini secara singkat pada setiap bab_
+                    Buat ringkasan dari document yang saya kirim, dan jadikan dalam format pdf
                 </div>
             </div>
 
@@ -95,7 +98,8 @@
                     <span class="icon">🔄</span> Regenerate response
                 </button>
                 <input type="text" placeholder="Make a Summary" class="summary-input">
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary" onclick="redirectToMain()">TRY NOW</button>
+            
             </div>
         </main>
     </div>

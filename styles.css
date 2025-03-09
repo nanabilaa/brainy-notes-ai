@@ -294,39 +294,284 @@ body {
         padding: 1rem;
     }
 }
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
 body {
-    background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+    display: flex;
+    background: linear-gradient(to right, #1B0034, #3A1B5D);
+    overflow-x: hidden;
     color: white;
 }
-.about-section {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #2C2C2C; /* Warna abu-abu gelap */
+
+/* ===== Sidebar ===== */
+.sidebar {
+    width: 80px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.4s ease-in-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
-.about-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #D1C4E9; /* Warna ungu muda */
+
+/* Animasi Sidebar Hover */
+.sidebar:hover {
+    width: 250px;
 }
-.highlight-section {
-    background-color: #D1C4E9; /* Warna ungu muda untuk kontras */
-    padding: 80px 20px;
-}
-.about-text {
-    max-width: 800px;
-    margin: 0 auto;
+
+.sidebar-title {
     font-size: 18px;
-    line-height: 1.6;
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.sidebar:hover .sidebar-title {
+    opacity: 1;
+}
+
+/* ===== Sidebar Navigation ===== */
+.sidebar ul {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+}
+
+.sidebar ul li.active a, .sidebar ul li a:hover {
+    color: #A67BFF;
+    font-weight: 600;
+}
+
+/* Submenu */
+.submenu {
+    padding-left: 15px;
+}
+
+/* ===== User Profile in Sidebar ===== */
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar:hover .user-profile {
+    opacity: 1;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #A67BFF;
+}
+
+.username {
+    font-size: 14px;
     color: white;
 }
-.footer-section {
-    background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+
+/* ===== Main Content ===== */
+.main-content {
+    flex-grow: 1;
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
     text-align: center;
-    padding: 40px 20px;
+    transition: margin-left 0.4s ease-in-out;
 }
-.trusted-logos img {
-    height: 50px;
-    margin: 10px;
-    filter: brightness(0) invert(1); /* Membuat logo jadi putih */
+
+.sidebar:hover ~ .main-content {
+    margin-left: 250px;
 }
+
+/* ===== Header Logo ===== */
+header .logo {
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 35px;
+    margin-right: 10px;
+}
+
+/* ===== Upload Section ===== */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.upload-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    width: 450px;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.upload-box:hover {
+    transform: scale(1.05);
+}
+
+.upload-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #A67BFF;
+}
+
+.upload-text h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.upload-text p {
+    font-size: 14px;
+    color: #E0E0E0;
+}
+
+/* ===== Action Section (Buttons & Input) ===== */
+.action-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Tombol Regenerate & Submit */
+.regenerate-btn, .submit-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.regenerate-btn i, .submit-btn i {
+    font-size: 16px;
+}
+
+.submit-btn {
+    background: linear-gradient(to right, #7C3AED, #A67BFF);
+    color: white;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #A67BFF, #7C3AED);
+}
+
+/* Input Box */
+.summary-input {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    outline: none;
+    text-align: center;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+footer .version {
+    font-weight: bold;
+    color: #A67BFF;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .action-section {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .summary-input {
+        width: 100%;
+    }
+
+    .upload-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar:hover {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 60px;
+    }
+
+    .sidebar:hover ~ .main-content {
+        margin-left: 220px;
+    }
+}
+
 
