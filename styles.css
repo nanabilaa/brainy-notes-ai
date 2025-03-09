@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+/* Index Class */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000;
@@ -72,7 +72,7 @@ body {
     padding: 2rem;
 }
 
-.sidebar {
+/* .sidebar {
     width: 250px;
     padding: 2rem;
     border-right: 1px solid #eee;
@@ -103,9 +103,9 @@ body {
 .sidebar .active a {
     color: #7C3AED;
     font-weight: 600;
-}
+} */
 
-.icon {
+/* .icon {
     margin-right: 0.5rem;
 }
 
@@ -125,13 +125,19 @@ body {
 .username {
     font-size: 0.9rem;
     color: #333;
-}
+} */
 
+        /* Sample Penggunaan  */
 .content {
-    flex-grow: 1;
-    padding: 2rem;
-    color: #333;
-    background-color: #fff;
+   background: rgba(42, 1, 66, 0.8); 
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #A67BFF; 
+    box-shadow: 0 0 15px rgba(166, 123, 255, 0.4);
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .upload-section {
@@ -152,7 +158,7 @@ body {
 }
 
 .upload-text {
-    padding: 1rem;
+    padding: 4%;
     color: white;
     flex-grow: 1;
 }
@@ -187,7 +193,9 @@ body {
     border-radius: 20px;
     cursor: pointer;
 }
+        /* Akhir dari sample penggunaan  */
 
+    /* Logo Company */
 footer {
     background-color: #2D0A51;
     color: white;
@@ -207,22 +215,27 @@ footer {
     height: 40px;
     filter: brightness(0) invert(1);
 }
+        /* Akhir dari logo company */
+
+/* Akhir dari Homepage */
+
+/* 
 body {
-            background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+            background-color: #1B0034; 
             color: white;
         }
         .about-section {
             text-align: center;
             padding: 50px 20px;
-            background-color: #2C2C2C; /* Warna abu-abu gelap */
-        }
+            background-color: #2C2C2C; }
+
         .about-title {
             font-size: 36px;
             font-weight: bold;
-            color: #D1C4E9; /* Warna ungu muda */
+            color: #D1C4E9;
         }
         .highlight-section {
-            background-color: #D1C4E9; /* Warna ungu muda untuk kontras */
+            background-color: #D1C4E9;
             padding: 80px 20px;
         }
         .about-text {
@@ -233,18 +246,18 @@ body {
             color: white;
         }
         .footer-section {
-            background-color: #1B0034; /* Warna ungu gelap sesuai gambar kedua */
+            background-color: #1B0034; 
             text-align: center;
             padding: 40px 20px;
         }
         .trusted-logos img {
             height: 50px;
             margin: 10px;
-            filter: brightness(0) invert(1); /* Membuat logo jadi putih */
-        }
+            filter: brightness(0) invert(1); 
+        } */
 
-/* Responsiveness */
-@media (max-width: 1024px) {
+/* Responsive */
+/* @media (max-width: 1024px) {
     .hero-section {
         flex-direction: column;
         text-align: center;
@@ -293,8 +306,9 @@ body {
     .content {
         padding: 1rem;
     }
-}
-/* ===== Global Styles ===== */
+} */
+
+/* ===== Main Classes ===== */
 * {
     margin: 0;
     padding: 0;
@@ -377,7 +391,7 @@ body {
     padding-left: 15px;
 }
 
-/* ===== User Profile in Sidebar ===== */
+/* ===== User Profile Sidebar ===== */
 .user-profile {
     display: flex;
     align-items: center;
@@ -535,43 +549,4 @@ footer .version {
     font-weight: bold;
     color: #A67BFF;
 }
-
-/* ===== Responsive Styles ===== */
-@media (max-width: 1024px) {
-    .main-content {
-        padding: 1rem;
-    }
-
-    .action-section {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .summary-input {
-        width: 100%;
-    }
-
-    .upload-box {
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: 60px;
-    }
-
-    .sidebar:hover {
-        width: 220px;
-    }
-
-    .main-content {
-        margin-left: 60px;
-    }
-
-    .sidebar:hover ~ .main-content {
-        margin-left: 220px;
-    }
-}
-
-
+/* Akhir dari kelas main */
