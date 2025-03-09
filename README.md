@@ -20,6 +20,4 @@ Upload Dokumen
 Klik "Generate Summary"
 Dapatkan ringkasan dalam hitungan detik
 
-🤝 Kontribusi
-Jika ingin berkontribusi, fork repository ini, buat branch baru, dan lakukan pull request.
 <!--  -->
