@@ -1,0 +1,188 @@
+body {
+    height: 100vh;
+    background-color: #1b0034; /* Warna ungu gelap */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .container {
+    max-width: 900px;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .signup-box {
+    width: 50%;
+    padding: 40px;
+    background: white; /* Warna putih penuh di sisi kiri */
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+  }
+  
+  .animation-box {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1); /* Efek glassmorphism */
+    backdrop-filter: blur(10px);
+  }
+  
+  .animation-box img {
+    width: 250px;
+    animation: float 3s infinite alternate ease-in-out;
+  }
+  
+  @keyframes float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }
+  
+  .form-control {
+    background: #f1f1f1; /* Warna input lebih terang */
+    border: none;
+    color: black;
+  }
+  
+  .form-control::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .btn-primary {
+    background-color: #a688fa; /* Warna keunguan */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #805ad5;
+  }
+  
+  .google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 30px;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+  }
+  
+  .google-btn img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  
+  .form-check-input:checked {
+    background-color: #a688fa;
+    border-color: #a688fa;
+  }
+  
+  .terms-link {
+    color: #a688fa;
+  }
+  
+  .signin-link {
+    color: #a688fa;
+    text-decoration: none;
+  }
+  
+  .signin-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column-reverse; /* Supaya signup tetap di atas */
+      height: auto;
+    }
+    .signup-box,
+    .animation-box {
+      width: 100%;
+      padding: 30px;
+    }
+  }
+  
+  /* Additional styles for animations and popups */
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(5px);
+    }
+  }
+  
+  .shake {
+    animation: shake 0.5s;
+  }
+  
+  /* Custom styling for SweetAlert2 popups */
+  .swal2-popup {
+    font-family: "Arial", sans-serif;
+    border-radius: 15px !important;
+    padding: 2em;
+  }
+  
+  .swal2-title {
+    color: #1b0034;
+    font-weight: bold;
+  }
+  
+  .swal2-confirm {
+    background-color: #a688fa !important;
+    border-radius: 30px !important;
+    padding: 10px 25px !important;
+  }
+  
+  .swal2-confirm:hover {
+    background-color: #805ad5 !important;
+  }
+  
+  /* Input highlight effect for invalid fields */
+  .invalid-input {
+    border: 2px solid #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.05) !important;
+    transition: all 0.3s ease;
+  }
+  
+  .valid-input {
+    border: 2px solid #51cf66 !important;
+    background-color: rgba(81, 207, 102, 0.05) !important;
+    transition: all 0.3s ease;
+  }
+  
+  .animated-popup {
+    border-radius: 15px;
+  }
+  
+  
