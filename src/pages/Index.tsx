@@ -6,8 +6,10 @@ import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import PDFPreview from '@/components/PDFPreview/PDFPreview';
 import Summary from '@/components/Summary/Summary';
 import { ArrowLeft } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Index = () => {
+  const { user } = useAuth();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
