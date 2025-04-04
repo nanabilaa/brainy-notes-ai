@@ -1,10 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { Clock, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 const History = () => {
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
   // Mock history data
   const historyItems = [
     { id: 1, title: 'Research Paper.pdf', date: '2023-10-15', size: '2.3MB' },
@@ -15,7 +21,7 @@ const History = () => {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       
       <main className="flex-1 p-6 overflow-y-auto max-h-screen">
         <div className="max-w-5xl mx-auto">

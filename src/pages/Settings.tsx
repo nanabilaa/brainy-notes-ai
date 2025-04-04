@@ -1,12 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { Database, Cpu, Moon, Sun, Languages } from 'lucide-react';
 
 const Settings = () => {
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       
       <main className="flex-1 p-6 overflow-y-auto max-h-screen">
         <div className="max-w-5xl mx-auto">
