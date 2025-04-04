@@ -91,6 +91,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
+        // Temporarily disabled email verification
+        // options: {
+        //   emailRedirectTo: window.location.origin,
+        // }
       });
 
       if (error) throw error;
@@ -120,6 +124,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           data: {
             username: name,
           },
+          // Temporarily disabled email verification
+          // emailRedirectTo: window.location.origin,
         },
       });
 

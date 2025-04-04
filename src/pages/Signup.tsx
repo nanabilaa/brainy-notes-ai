@@ -1,35 +1,56 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { Brain } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState('signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { signIn, signUp, user } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Login Attempt",
-      description: "This is a placeholder. Actual authentication would happen here.",
-    });
-    navigate('/');
+    setIsLoading(true);
+    
+    try {
+      await signIn(email, password);
+      navigate('/');
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Signup Attempt",
-      description: "This is a placeholder. Actual signup logic would happen here.",
-    });
-    navigate('/');
+    setIsLoading(true);
+    
+    try {
+      await signUp(email, password, name);
+      navigate('/');
+    } catch (error) {
+      console.error('Signup error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -56,6 +77,7 @@ const Signup = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                  disabled={isLoading}
                 />
                 <Input
                   type="password"
@@ -64,14 +86,19 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                  disabled={isLoading}
                 />
                 <div className="text-sm">
                   <a href="#" className="text-primary hover:underline">
                     Forgot password?
                   </a>
                 </div>
-                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
-                  Login
+                <Button 
+                  type="submit" 
+                  className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Logging in...' : 'Login'}
                 </Button>
               </form>
               <div className="mt-4 text-center text-sm">
@@ -96,6 +123,7 @@ const Signup = () => {
                   onChange={(e) => setName(e.target.value)}
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                  disabled={isLoading}
                 />
                 <Input
                   type="email"
@@ -104,6 +132,7 @@ const Signup = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                  disabled={isLoading}
                 />
                 <Input
                   type="password"
@@ -112,9 +141,14 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                  disabled={isLoading}
                 />
-                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
-                  Create Account
+                <Button 
+                  type="submit" 
+                  className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Creating Account...' : 'Create Account'}
                 </Button>
               </form>
               <div className="mt-4 text-center text-sm">
