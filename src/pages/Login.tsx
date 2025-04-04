@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { Brain } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState('login');
@@ -13,24 +15,48 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { signIn, signUp, user, loading } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Login Attempt",
-      description: "This is a placeholder. Actual authentication would happen here.",
-    });
-    navigate('/');
+    try {
+      await signIn(email, password);
+      // Navigation happens automatically in the auth context effect
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Signup Attempt",
-      description: "This is a placeholder. Actual signup logic would happen here.",
-    });
-    navigate('/');
+    try {
+      await signUp(email, password, name);
+      // Navigation happens automatically in the auth context effect
+    } catch (error) {
+      console.error('Signup error:', error);
+    }
   };
+
+  // If still loading auth state, render loading spinner
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
+  // If already logged in, redirect to home
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center text-foreground p-6" style={{ backgroundImage: 'radial-gradient(circle at center top, #432a99 0%, #1a103e 100%)' }}>
@@ -70,8 +96,8 @@ const Login = () => {
                     Forgot password?
                   </a>
                 </div>
-                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
-                  Login
+                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium" disabled={loading}>
+                  {loading ? 'Logging in...' : 'Login'}
                 </Button>
               </form>
               <div className="mt-4 text-center text-sm">
@@ -113,8 +139,8 @@ const Login = () => {
                   required
                   className="bg-white/10 border-white/20 focus-visible:ring-primary"
                 />
-                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
-                  Create Account
+                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium" disabled={loading}>
+                  {loading ? 'Creating Account...' : 'Create Account'}
                 </Button>
               </form>
               <div className="mt-4 text-center text-sm">

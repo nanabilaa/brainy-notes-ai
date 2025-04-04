@@ -1,11 +1,14 @@
 
-import React, { useState } from 'react';
-import { FileText, Clock, Settings, Info, Menu, X } from 'lucide-react';
+import React from 'react';
+import { FileText, Clock, Settings, Info, Menu, X, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import LoginButtons from '../Login/LoginButtons';
+import { useAuth } from '@/contexts/AuthContext';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Sidebar: React.FC<{ isOpen: boolean; toggleSidebar: () => void }> = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
+  const { user, profile, signOut } = useAuth();
 
   return (
     <>
@@ -52,8 +55,34 @@ const Sidebar: React.FC<{ isOpen: boolean; toggleSidebar: () => void }> = ({ isO
         </div>
 
         <div className="p-4 border-t border-white/10">
-          <p className="text-sm text-brainy-text/70 mb-2">Not logged in</p>
-          <LoginButtons />
+          {user ? (
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage src={profile?.avatar_url} />
+                  <AvatarFallback>
+                    {profile?.username ? profile.username.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-medium">{profile?.username || user.email?.split('@')[0]}</p>
+                  <p className="text-xs text-brainy-text/70 truncate" title={user.email}>{user.email}</p>
+                </div>
+              </div>
+              <button 
+                onClick={signOut}
+                className="glass-button w-full py-2 justify-center flex items-center gap-2"
+              >
+                <LogOut size={16} />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="text-sm text-brainy-text/70 mb-2">Not logged in</p>
+              <LoginButtons />
+            </>
+          )}
         </div>
       </aside>
       
