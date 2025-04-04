@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FileText, Clock, Settings, Info, Menu, X, LogOut } from 'lucide-react';
+import { FileText, Clock, Settings, Info, Menu, X, LogOut, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import LoginButtons from '../Login/LoginButtons';
 import { useAuth } from '@/contexts/AuthContext';
@@ -61,18 +61,21 @@ const Sidebar: React.FC<{ isOpen: boolean; toggleSidebar: () => void }> = ({ isO
             </div>
           ) : user ? (
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Avatar>
-                  <AvatarImage src={profile?.avatar_url || undefined} />
-                  <AvatarFallback>
-                    {profile?.username ? profile.username.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="font-medium">{profile?.username || user.email?.split('@')[0]}</p>
-                  <p className="text-xs text-brainy-text/70 truncate" title={user.email || ""}>{user.email}</p>
+              <button className="w-full flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Avatar className="bg-purple-600">
+                    <AvatarImage src={profile?.avatar_url || undefined} />
+                    <AvatarFallback className="bg-purple-600 text-white">
+                      {profile?.username ? profile.username.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-medium text-left">{profile?.username || user.email?.split('@')[0]}</p>
+                    <p className="text-xs text-brainy-text/70">Free plan</p>
+                  </div>
                 </div>
-              </div>
+                <ChevronDown size={16} className="text-brainy-text/70" />
+              </button>
               <button 
                 onClick={() => signOut()}
                 className="glass-button w-full py-2 justify-center flex items-center gap-2"

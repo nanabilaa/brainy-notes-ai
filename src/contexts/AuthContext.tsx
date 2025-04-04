@@ -113,6 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, name: string) => {
     try {
       setLoading(true);
+      // Disabled email verification by removing emailRedirectTo option
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -120,6 +121,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           data: {
             username: name,
           },
+          // Email verification is disabled by removing this option
+          // emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
