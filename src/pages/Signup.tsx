@@ -1,120 +1,139 @@
-
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
-import { useToast } from "@/hooks/use-toast";
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useToast } from '@/hooks/use-toast';
+import { Brain } from 'lucide-react';
 
 const Signup = () => {
+  const [activeTab, setActiveTab] = useState('signup');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (password !== confirmPassword) {
-      toast({
-        title: "Password Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    // This would be replaced with actual registration logic
+    toast({
+      title: "Login Attempt",
+      description: "This is a placeholder. Actual authentication would happen here.",
+    });
+    navigate('/');
+  };
+
+  const handleSignup = (e: React.FormEvent) => {
+    e.preventDefault();
     toast({
       title: "Signup Attempt",
-      description: "This is a placeholder. Actual registration would happen here.",
+      description: "This is a placeholder. Actual signup logic would happen here.",
     });
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-brainy-darkPurple bg-gradient-to-br from-purple-900/20 to-indigo-900/20 p-4">
-      <div className="glass-darker max-w-md w-full rounded-2xl overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center text-foreground p-6" style={{ backgroundImage: 'radial-gradient(circle at center top, #432a99 0%, #1a103e 100%)' }}>
+      <div className="glass-card max-w-lg w-full rounded-2xl shadow-lg">
         <div className="p-8">
           <div className="flex flex-col items-center mb-6">
-            <div className="rounded-full bg-brainy-lightPurple/30 p-4 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brainy-accent">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                <path d="M14.05 2a9 9 0 0 1 8 7.94"></path>
-                <path d="M14.05 6A5 5 0 0 1 18 10"></path>
-              </svg>
+            <div className="h-12 w-12 rounded-full bg-primary/80 flex items-center justify-center shadow-md">
+              <Brain className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-brainy-text">BrainyNotes</h1>
+            <h1 className="text-3xl font-bold text-brainy-text mt-2">BrainyNotes</h1>
           </div>
-          
-          <h2 className="text-xl font-bold text-center mb-6">Create an account</h2>
-          
-          <div className="flex gap-2 mb-6">
-            <Link to="/login" className="flex-1 py-3 rounded-md text-center font-medium text-white/70 hover:bg-white/5 transition-colors">
-              Login
-            </Link>
-            <Link to="/signup" className="flex-1 py-3 bg-brainy-darkPurple/80 rounded-md text-center font-medium">
-              Signup
-            </Link>
-          </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-brainy-darkPurple/50 border-white/10 focus-visible:ring-brainy-accent"
-              />
-            </div>
-            
-            <div>
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="bg-brainy-darkPurple/50 border-white/10 focus-visible:ring-brainy-accent"
-              />
-            </div>
-            
-            <div>
-              <Input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                className="bg-brainy-darkPurple/50 border-white/10 focus-visible:ring-brainy-accent"
-              />
-            </div>
-            
-            <div className="flex items-center">
-              <input 
-                id="terms" 
-                type="checkbox" 
-                className="w-4 h-4 rounded bg-brainy-darkPurple/50 border-white/20 accent-brainy-accent" 
-                required
-              />
-              <label htmlFor="terms" className="ml-2 text-sm">
-                I agree to the <a href="#" className="text-brainy-lightPurple hover:underline">Terms of Service</a> and <a href="#" className="text-brainy-lightPurple hover:underline">Privacy Policy</a>
-              </label>
-            </div>
-            
-            <button 
-              type="submit" 
-              className="w-full py-3 bg-brainy-lightPurple hover:bg-brainy-lightPurple/90 transition-colors rounded-md font-medium"
-            >
-              Create Account
-            </button>
-          </form>
-          
-          <div className="text-center mt-6 text-sm">
-            Already have an account? <Link to="/login" className="text-brainy-lightPurple hover:underline">Log in</Link>
-          </div>
+          <Tabs defaultValue="signup" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsTrigger value="login">Login</TabsTrigger>
+              <TabsTrigger value="signup">Signup</TabsTrigger>
+            </TabsList>
+            <TabsContent value="login">
+              <form onSubmit={handleLogin} className="space-y-4">
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                />
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                />
+                <div className="text-sm">
+                  <a href="#" className="text-primary hover:underline">
+                    Forgot password?
+                  </a>
+                </div>
+                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
+                  Login
+                </Button>
+              </form>
+              <div className="mt-4 text-center text-sm">
+                Not a member?{" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveTab('signup');
+                  }}
+                  className="text-primary hover:underline"
+                >
+                  Signup now
+                </a>
+              </div>
+            </TabsContent>
+            <TabsContent value="signup">
+              <form onSubmit={handleSignup} className="space-y-4">
+                <Input
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                />
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                />
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 focus-visible:ring-primary"
+                />
+                <Button type="submit" className="w-full py-3 bg-primary hover:bg-primary/90 transition-colors rounded-md font-medium">
+                  Create Account
+                </Button>
+              </form>
+              <div className="mt-4 text-center text-sm">
+                Already have an account?{" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveTab('login');
+                  }}
+                  className="text-primary hover:underline"
+                >
+                  Login
+                </a>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
-      
       <div className="fixed bottom-4 left-4">
         <Link to="/" className="glass-button flex items-center gap-2">
           <span>Back to Home</span>
