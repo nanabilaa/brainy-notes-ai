@@ -113,7 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, name: string) => {
     try {
       setLoading(true);
-      // Disabled email verification by removing emailRedirectTo option
+      // Completely bypass email verification by using autoConfirmNewUsers
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -121,12 +121,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           data: {
             username: name,
           },
-          // Email verification is disabled by removing this option
-          // emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
       if (error) throw error;
+      
+      // Auto sign in after signup to bypass email verification
+      if (!error) {
+        await signIn(email, password);
+      }
+      
       toast({
         title: "Registration successful",
         description: "Welcome to BrainyNotes!",
