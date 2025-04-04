@@ -120,8 +120,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           data: {
             username: name,
           },
-          // Disable email verification for now
-          emailRedirectTo: undefined,
         },
       });
 
