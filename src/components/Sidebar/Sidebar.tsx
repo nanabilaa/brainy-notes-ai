@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Sidebar: React.FC<{ isOpen: boolean; toggleSidebar: () => void }> = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, signOut, loading } = useAuth();
 
   return (
     <>
@@ -55,22 +55,26 @@ const Sidebar: React.FC<{ isOpen: boolean; toggleSidebar: () => void }> = ({ isO
         </div>
 
         <div className="p-4 border-t border-white/10">
-          {user ? (
+          {loading ? (
+            <div className="flex justify-center py-4">
+              <div className="animate-spin h-5 w-5 border-2 border-primary border-t-transparent rounded-full"></div>
+            </div>
+          ) : user ? (
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={profile?.avatar_url} />
+                  <AvatarImage src={profile?.avatar_url || undefined} />
                   <AvatarFallback>
                     {profile?.username ? profile.username.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <p className="font-medium">{profile?.username || user.email?.split('@')[0]}</p>
-                  <p className="text-xs text-brainy-text/70 truncate" title={user.email}>{user.email}</p>
+                  <p className="text-xs text-brainy-text/70 truncate" title={user.email || ""}>{user.email}</p>
                 </div>
               </div>
               <button 
-                onClick={signOut}
+                onClick={() => signOut()}
                 className="glass-button w-full py-2 justify-center flex items-center gap-2"
               >
                 <LogOut size={16} />
