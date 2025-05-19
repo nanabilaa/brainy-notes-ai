@@ -13,16 +13,20 @@ $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
+
     <div class="sidebar">
         <div>
-            <h1>BrainyNotes</h1>
+        <div class="logo"><i data-lucide="brain"></i> BrainyNotes
+        </div>
+
             <div class="title-separator"></div> <!-- Separator below the title -->
             <p class="menu-title">Main Menu</p> <!-- Main Menu text -->
             <ul class="menu">
-                <li><a href="#documents" class="nav-link selected"><i data-lucide="file-text"></i> My Documents</a></li>
+                <li><a href="index.php" class="nav-link"><i data-lucide="file-text"></i> My Documents</a></li>
                 <li><a href="#history" class="nav-link"><i data-lucide="clock"></i> History</a></li>
                 <li><a href="#settings" class="nav-link"><i data-lucide="settings"></i> Settings</a></li>
-                <li><a href="#about" class="nav-link"><i data-lucide="info"></i> About</a></li>
+               <li><a href="about.php" class="nav-link"><i data-lucide="info"></i> About</a></li>
+
             </ul>
         </div>
         <div class="auth-buttons">
@@ -74,5 +78,6 @@ $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
         </div>
     </div>
     <script src="scripts/app.js"></script>
+    <styles>
 </body>
 </html>
