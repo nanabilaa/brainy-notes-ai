@@ -3,7 +3,6 @@ const AUTH_ENDPOINT = '/auth.php';
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
 
-
   // ROUTES
   const routes = {
     home: `
@@ -13,15 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <button id="select-pdf">Select PDF</button>
       </div>
       <div class="how-it-works">
-        <div class="step">
-          <img src="assets/images/upload-logo.png" alt="Step 1">
-        </div>
-    <div class="step">
-            <img src="assets/images/proces-logo.png" alt="Step 2">
-        </div>
-        <div class="step">
-          <img src="assets/images/review-logo.png" alt="Step 3">
-        </div>
+        <div class="step"><img src="assets/images/upload-logo.png" alt="Step 1"></div>
+        <div class="step"><img src="assets/images/proces-logo.png" alt="Step 2"></div>
+        <div class="step"><img src="assets/images/review-logo.png" alt="Step 3"></div>
       </div>
     `,
     history: `
@@ -45,30 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // NAVIGATION
- function navigateTo(route) {
-  const app = document.getElementById('app');
-  app.innerHTML = routes[route] || routes.home;
-}
+  function navigateTo(route) {
+    const app = document.getElementById('app');
+    app.innerHTML = routes[route] || routes.home;
+    lucide.createIcons(); // ensure icons render again on navigation
+  }
 
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
-    
-    // Jika link menggunakan hash (#) untuk SPA
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const route = href.substring(1);
-      
-      // Update class selected
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('selected'));
-      link.classList.add('selected');
-      
-      // Render konten SPA
-      navigateTo(route);
-    }
+  // expose to global for PHP-triggered rerender
+  window.navigateTo = navigateTo;
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const route = href.substring(1);
+
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('selected'));
+        link.classList.add('selected');
+
+        navigateTo(route);
+      }
+    });
   });
-});
-
 
   // AUTH MODAL
   const authModal = document.getElementById('auth-modal');
@@ -87,9 +79,9 @@ document.querySelectorAll('.nav-link').forEach(link => {
     authModal.classList.add('hidden');
   }
 
-  document.querySelector('.login-button').addEventListener('click', () => openAuthModal('login'));
-  document.querySelector('.signup-button').addEventListener('click', () => openAuthModal('signup'));
-  closeAuthModalButton.addEventListener('click', closeAuthModal);
+  document.querySelector('.login-button')?.addEventListener('click', () => openAuthModal('login'));
+  document.querySelector('.signup-button')?.addEventListener('click', () => openAuthModal('signup'));
+  closeAuthModalButton?.addEventListener('click', closeAuthModal);
 
   [loginTab, signupTab].forEach(tab => {
     tab.addEventListener('click', () => {
@@ -124,8 +116,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
         credentials: 'same-origin'
       });
 
-      if (!response.ok) throw new Error(`Server responded with status: ${response.status}`);
-
       const data = await response.json();
 
       if (data.error) throw new Error(data.error);
@@ -137,13 +127,13 @@ document.querySelectorAll('.nav-link').forEach(link => {
       }
     } catch (error) {
       console.error('Email check failed:', error);
-      if (confirm(`Could not verify email availability (${error.message}). Do you want to continue anyway?`)) {
+      if (confirm(`Could not verify email (${error.message}). Continue anyway?`)) {
         signupForm.submit();
       }
     }
   });
 
-  // LOGIN FORM FEEDBACK
+  // LOGIN FORM SUBMIT HANDLER
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -153,26 +143,17 @@ document.querySelectorAll('.nav-link').forEach(link => {
     try {
       submitBtn.textContent = 'Logging in...';
       submitBtn.disabled = true;
-      loginForm.submit();
+      loginForm.submit(); // normal redirect ke auth.php
     } catch (error) {
       console.error('Login error:', error);
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
-      alert('Login failed. Please try again later.');
+      alert('Login failed. Please try again.');
     }
   });
 
-  // INITIAL LOAD
-  navigateTo('home');
+  // INITIAL LOAD (only if not already redirected from login)
+  if (!window.location.search.includes('loggedin')) {
+    navigateTo('home');
+  }
 });
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            // SPA: render konten di #app
-        }
-        // Jika href bukan hash, biarkan browser melakukan navigasi normal
-    });
-});
-
