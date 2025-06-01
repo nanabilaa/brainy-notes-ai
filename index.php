@@ -2,6 +2,12 @@
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
 $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
+
+// Check for API authentication
+$hasAPIToken = false;
+if (!$isLoggedIn) {
+    // JavaScript will check localStorage for API token
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,16 +16,43 @@ $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BrainyNotes - PDF Summarizer</title>
-  <link rel="stylesheet" href="/styles/styles.css?v=4">
+  <link rel="stylesheet" href="/styles/styles.css?v=5">
 
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js" defer></script>
-  <script src="/scripts/app.js?v=4" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="/scripts/app.js?v=6" defer></script>
+
+  <script>
+    // Check API authentication on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const apiToken = localStorage.getItem('session_token');
+      const userInfo = localStorage.getItem('user_info');
+      
+      if (apiToken && userInfo) {
+        // Hide auth buttons and show user info for API users
+        const authButtons = document.querySelector('.auth-buttons');
+        const userData = JSON.parse(userInfo);
+        
+        authButtons.innerHTML = `
+          <div class="user-info">
+            <span class="user-email">${userData.username}</span>
+          </div>
+          <button type="button" class="logout-button" onclick="handleAPILogout()">Logout</button>
+        `;
+      }
+    });
+
+    function handleAPILogout() {
+      localStorage.removeItem('session_token');
+      localStorage.removeItem('user_info');
+      window.location.reload();
+    }
+  </script>
 
   <?php if (isset($_GET['loggedin'])): ?>
   <script>
-    // SPA refresh trigger after redirect login
     window.onload = () => {
-      console.log("SPA refresh after login");
+      console.log("Login successful - redirecting to main page");
       if (typeof lucide !== 'undefined') lucide.createIcons();
       if (typeof window.navigateTo === 'function') {
         window.navigateTo('home');
@@ -66,27 +99,36 @@ $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
   <!-- Modal Login/Signup -->
   <div id="auth-modal" class="modal hidden">
     <div class="modal-content">
-      <div class="logo">BN</div>
-      <div class="tabs">
-        <button id="login-tab" class="active" data-target="login">Login</button>
-        <button id="signup-tab" data-target="signup">Signup</button>
+      <div class="modal-logo">
+        <i data-lucide="brain"></i>
       </div>
+      <h2>BrainyNotes</h2>
+      
+      <div class="auth-tabs">
+        <button id="login-tab" class="auth-tab active" data-target="login">Login</button>
+        <button id="signup-tab" class="auth-tab" data-target="signup">Signup</button>
+      </div>
+
       <form id="login-form" action="/auth.php" method="POST">
         <input type="hidden" name="type" value="login">
         <input type="email" name="email" placeholder="Email Address" required>
         <input type="password" name="password" placeholder="Password" required>
         <a href="#" class="forgot-password">Forgot password?</a>
-        <button type="submit">Login</button>
+        <button type="submit" class="auth-submit-btn">Login</button>
+        <p class="auth-switch">Not a member? <a href="#" onclick="switchToSignup()">Signup now</a></p>
       </form>
-      <form id="signup-form" action="/auth.php" method="POST" class="hidden">
+
+      <form id="signup-form" action="/auth.php" method="POST" style="display: none;">
         <input type="hidden" name="type" value="signup">
         <input type="text" name="full_name" placeholder="Full Name" required>
         <input type="email" name="email" placeholder="Email Address" required>
         <input type="password" name="password" placeholder="Password" required>
         <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-        <button type="submit">Signup</button>
+        <button type="submit" class="auth-submit-btn">Signup</button>
+        <p class="auth-switch">Already a member? <a href="#" onclick="switchToLogin()">Login now</a></p>
       </form>
-      <button id="close-auth-modal" class="close-button" type="button">Close</button>
+
+      <button id="close-auth-modal" class="close-button" type="button">×</button>
     </div>
   </div>
 
@@ -95,8 +137,25 @@ $userEmail = $isLoggedIn ? $_SESSION['email'] : '';
     function showModal(tab = 'login') {
       const modal = document.getElementById('auth-modal');
       modal.classList.remove('hidden');
-      document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
-      document.getElementById('signup-form').classList.toggle('hidden', tab !== 'signup');
+      if (tab === 'signup') {
+        switchToSignup();
+      } else {
+        switchToLogin();
+      }
+    }
+
+    function switchToLogin() {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('login-tab').classList.add('active');
+      document.getElementById('signup-tab').classList.remove('active');
+    }
+
+    function switchToSignup() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+      document.getElementById('login-tab').classList.remove('active');
+      document.getElementById('signup-tab').classList.add('active');
     }
 
     document.getElementById('close-auth-modal').addEventListener('click', () => {
